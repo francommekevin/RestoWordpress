@@ -1,0 +1,186 @@
+ /*  this css for form    */
+
+.form_container{
+
+    border-radius: 5px;
+    background-color: lightgray;
+    padding: 0px;
+    margin: 0px;
+
+}
+
+
+
+.reservationtitle{
+    
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-size: 25px;
+  text-align: center;
+  text-transform: uppercase;
+
+}
+
+
+input .theone[type=text], select {
+    
+    
+    width: 10%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: #f1f1f1;
+    
+}
+
+
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #fbfbfb;
+    outline: none;
+}
+
+
+
+
+input .theone [type=submit] {
+    
+    
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    
+}
+
+input .theone [type=submit] {
+    
+    
+    width: 50px;
+    padding: 20px;
+    margin: 10px;
+
+    
+}
+
+input .theone [type=submit]:hover {
+    
+    
+    background-color: #45a049;
+     width: 300px;
+    
+}
+
+
+
+/*///////////////pop modal for form////////////  */
+
+
+
+/* The Modal (background) */
+.reserstyle {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    padding-top: 10%; /* Location of the box */
+    padding-bottom: 10%;
+    left: 25%;
+    top: 0;
+    width: 50%; /* Full width */
+    height: 100%; /* Full height */
+    overflow : auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgb(0,0,0,0); /* Black w/ opacity */
+
+
+
+}
+
+ /* width */
+ ::-webkit-scrollbar {
+     width: 0px;
+ }
+
+
+
+/* Modal Content */
+.reserstyle-content {
+    position: relative;
+
+    
+    
+    
+   background-color: white; /*   background */
+    
+
+    margin: 0;
+    padding: 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.50);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.reserstyle-header {
+    padding: 2px 16px;
+    background-color: #fff;
+    color: white;
+}
+
+.reserstyle-body {padding: 2px 16px;}
+
+.reserstyle-footer {
+    padding: 2px 16px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    color: white;
+}
+
+
+	/* =========================== end  modal  =========================== */
+
+
+
+
+
+
