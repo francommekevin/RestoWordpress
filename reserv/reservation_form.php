@@ -19,6 +19,11 @@ class ReservationPlugin {
         include_once plugin_dir_path( __FILE__ ).'/backoffice.php';
         new ReservationBackoffice();
 
+        include_once plugin_dir_path( __FILE__ ).'/sendinblue.php';
+        new ReservationSendinBlue();
+
+
+
         //Appel des actions
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ) ); //wp veut dire travailler en front
         add_action( 'admin_menu', array( $this, 'add_admin_pages') );
@@ -27,6 +32,9 @@ class ReservationPlugin {
         //Appel des fonctions Hook
         register_activation_hook(__FILE__, array($this, 'install'));
         register_uninstall_hook(__FILE__, array($this, 'uninstall'));
+
+        //Appel des shortcodes
+        add_shortcode( 'reservation_formulaire', 'reservation_shortcode' );
 
     }
 
@@ -56,8 +64,9 @@ class ReservationPlugin {
     {
         add_menu_page('Liste des reservations', 'Restaurant', 'manage_options', 'ReservationPlugin', array('ReservationBackoffice', 'admin_index_page'), 'dashicons-id-alt', 110);
 
-        //$hook = add_submenu_page('ReservationPlugin', 'Gestion du formulaire', 'Liste des clients', 'manage_options', 'reservation_formulaire', array('ReservationBackoffice', 'admin_index_page'));
-        //add_action('load-'.$hook, array($this, 'process_action'));
+        $hook = add_submenu_page('ReservationPlugin', 'Gestion de SendinBlue', 'QR Code', 'manage_options', 'ReservationSendinBlue', array('ReservationSendinBlue', 'qr'));
+
+        add_action('load-'.$hook, array($this, 'process_action'));
 
     }
 
@@ -103,22 +112,22 @@ function html_form_code()
                 <div class="form_container"><!-- class de tout le form -->
                     <form action="" method="post">
                         <label for="Nom">Nom</label>
-                        <input class="theone" type="text" id="Nom" name="Nom" placeholder="Nom" required>
+                        <input class="theone"  value="<?php echo get_user_meta(get_current_user_id(), 'nom', true); ?>"type="text" id="Nom" name="Nom" placeholder="Nom" required>
 
                         <label for="Prenom">Prenom</label>
-                        <input class="theone" type="text" id="Prenom" name="Prenom" placeholder="Prenom" required>
+                        <input class="theone" value="<?php echo get_user_meta(get_current_user_id(), 'prenom', true); ?>" type="text" id="Prenom" name="Prenom" placeholder="Prenom" required>
 
                         <label for="Tele">Numero de téléphone</label>
-                        <input class="theone" type="tel" id="Tele" name="Tele" placeholder="Téléphone" required>
+                        <input class="theone" value="<?php echo get_user_meta(get_current_user_id(), 'telephone', true); ?>" type="tel" id="Tele" name="Tele" placeholder="Téléphone" required>
 
                         <label for="Date">Date de Réservation</label>
-                        <input class="theone" type="date" id="Date" name="Date" placeholder="JJ/MM/AAAA" required>
+                        <input class="theone" type="datetime-local" id="Date" name="Date" placeholder="JJ/MM/AAAA" required>
 
                         <label for="nombre_personne">Nombre d'accompagnateurs</label>
-                        <input class="theone" type="number" id="nombre_personne" name="nombre_personne" placeholder="0/1/2">
+                        <input class="theone" type="number" id="nombre_personne" name="nombre_personne" placeholder="1/2">
 
                         <label for="Email">Entre votre adresse mail</label>
-                        <input class="theone" type="email" id="Email" name="Email" placeholder="mail@mail.com" required>
+                        <input class="theone" value="<?php echo get_user_meta(get_current_user_id(), 'email', true); ?>" type="email" id="Email" name="Email" placeholder="mail@mail.com" required>
 
                         <br>
                         <input type="submit" value="Valider votre inscription">
@@ -177,26 +186,6 @@ function reservation_shortcode() {
     html_form_code();
     return ob_get_clean();
 }
-
-// nom de la page de formulaire//
-add_shortcode( 'reservation_formulaire', 'reservation_shortcode' );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?>
